@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Suite" parallel="false">
+<listeners>
+<listener class-name="com.qa.listeners.TestListener"/>
+</listeners>
+    <test name="SamsungGalaxyS21">
+        <parameter name="platformName" value="Android" />
+        <parameter name="platformVersion" value="14" />
+        <parameter name="deviceName" value="SamsungGalaxyS21" />
+         <parameter name="deviceUdid" value="RFCR10YVJHM" />
+        <classes>
+            <class name="com.qa.tests.LoginTests"/>
+        </classes>
+    </test>
+</suite> <!-- Suite -->
