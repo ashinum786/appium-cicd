@@ -16,6 +16,7 @@
           <include name="validLogin"/>
           <include name="afterTest"/>
           <include name="beforeClass"/>
+          <include name="invalidUserName"/>
           <include name="afterMethod"/>
           <include name="beforeTest"/>
           <include name="beforeMethod"/>
