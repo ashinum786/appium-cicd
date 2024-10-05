@@ -55,7 +55,7 @@ public class LoginTests extends BaseTest {
   @Test
   public void validLogin() throws InterruptedException {
 	  loginPage.enterUserName("ashn156");
-	  loginPage.enterPassword("nyu12346");
+	  loginPage.enterPassword("nyu12345.");
 	  biometricsPage=loginPage.pressLoginButton();
 	  loginPage.clickOkTurnOnBiometrics();
 	  
