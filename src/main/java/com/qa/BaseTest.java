@@ -2,9 +2,11 @@ package com.qa;
 
 
 
+import com.google.common.collect.ImmutableMap;
 import com.qa.utils.TestUtils;
 import com.sun.org.apache.xml.internal.security.utils.Base64;
 
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.screenrecording.CanRecordScreen;
@@ -24,6 +26,7 @@ import java.net.URI;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
@@ -47,7 +50,7 @@ public class BaseTest {
 	public void afterMethod(ITestResult result) {
 		System.out.println("super after method");
 		String media=((CanRecordScreen)driver).stopRecordingScreen();
-		if(result.getStatus()==2) {
+		if(result.getStatus()==1) {
 			Map<String,String> params=result.getTestContext().getCurrentXmlTest().getAllParameters();
 			
 			String dir="videos"+File.separator+ params.get("platformName")+"_"+ params.get("platformVersion")+"_"
@@ -99,7 +102,7 @@ public class BaseTest {
 		  String s=System.getProperty("user.dir")+(props.getProperty("androidAppLocation"));
 		  desiredCapabilities.setCapability("appium:app", s);
 		  driver = new AndroidDriver (new URI( props.getProperty("appiumURL")).toURL() ,desiredCapabilities);
-		  String sessionId=driver.getSessionId().toString();
+		 // String sessionId=driver.getSessionId().toString();
 		  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
 	  }catch(Exception e)
 	  {
@@ -138,6 +141,18 @@ public AppiumDriver getDriver() {
 public String getDateTime() {
 	return dateTime;
 }
+public void swipeGesture(){
+	 
+
+    WebElement element = driver.findElement(AppiumBy.
+            xpath("//*[@resource-id=\"io.appium.android.apis:id/gallery\"]/android.widget.ImageView[1]"));
+
+    driver.executeScript("mobile: swipeGesture", ImmutableMap.of(
+//            "left", 100, "top", 100, "width", 600, "height", 600,
+            "elementId", ((RemoteWebElement) element).getId(),
+            "direction", "left",
+            "percent", 0.75
+    ));}
   @AfterTest
   public void afterTest() {
 	  driver.quit();
